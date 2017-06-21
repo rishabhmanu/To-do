@@ -4,6 +4,14 @@
   <title>Home</title>
 </head>
 <body>
-  Welcome to To-do list
+
+  <h1> Welcome to To-do list </h1>
+  <h3> Now stay productive with To-do-lists </h3>
+  {% if user.is_authenticated %}
+      hi! <p> <a href="{% url 'logout' %}"> Logout </a> </p>
+      {% else %}
+      <p> <a href="{% url 'login' %}">Login</a>
+  {% endif %}
+
 </body>
 </html>
