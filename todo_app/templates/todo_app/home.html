@@ -8,6 +8,12 @@
       hi! {{user.username}}<p> <a href="{% url 'logout' %}"> Logout </a> </p>
   <h1> Welcome to To-do list </h1>
   <h3> Now stay productive with To-do-lists </h3>
+  <p> <h5> Your To-dos: </h5> </p>
+  <p> {%for work in tasks %}
+      {{ work.task }}   {{ work.status }} <br>
+      {% endfor %}
+    </p>
+
 {% else %}
     <h1>To-do-List</h1>
     <h3>Login to continue</h3>

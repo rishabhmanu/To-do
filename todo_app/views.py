@@ -2,10 +2,12 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login, authenticate
 from .forms import SignUpForm
+from .models import Todo
 
 
 def home(request):
-    return render(request, 'todo_app/home.html', {})
+    tasks = Todo.objects.all()
+    return render(request, 'todo_app/home.html', {'tasks':tasks})
 
 def signup(request):
     if request.method == 'POST':
