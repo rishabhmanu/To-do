@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
-from .forms import SignUpForm
+from .forms import SignUpForm, ToDoForm
 from .models import Todo
 
 @login_required
@@ -24,3 +24,17 @@ def signup(request):
     else:
         form = SignUpForm()
     return render(request, 'todo_app/signup.html', {'form': form})
+
+@login_required
+def post_new(request):
+    if request.method == "POST":
+        form = ToDoForm(request.POST)
+        if form.is_valid():
+            todo = form.save(commit=False)
+            todo.author = request.user
+            todo.status = form.cleaned_data.get('status')
+            todo.save()
+            return redirect('home')
+    else:
+        form = ToDoForm()
+    return render(request, 'todo_app/todo_new.html', {'form': form})

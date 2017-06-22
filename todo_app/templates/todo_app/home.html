@@ -13,6 +13,7 @@
       {{ work.task }}   {{ work.status }} <br>
       {% endfor %}
     </p>
+<p> <a href="{% url 'post_new' %}"> Create a new To-do </a> </p>
 
 {% else %}
     <h1>To-do-List</h1>
