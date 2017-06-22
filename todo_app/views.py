@@ -1,12 +1,14 @@
 from django.shortcuts import render, redirect
+# from django.contrib import auth
 from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth import login, authenticate
+from django.contrib.auth import login
+from django.contrib.auth.decorators import login_required
 from .forms import SignUpForm
 from .models import Todo
 
-
+@login_required
 def home(request):
-    tasks = Todo.objects.all()
+    tasks = Todo.objects.filter(author=request.user)
     return render(request, 'todo_app/home.html', {'tasks':tasks})
 
 def signup(request):
