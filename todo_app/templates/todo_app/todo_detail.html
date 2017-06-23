@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>to-do detail</title>
+</head>
+<body>
+<div class="post">
+      <a class="btn btn-default" href="{% url 'post_edit' pk=post.pk %}">Edit</a>
+      <h1>{{ post.task }}</h1>
+      <p> {{ post.status }} </p>
+
+</div>
+</body>
+</html>

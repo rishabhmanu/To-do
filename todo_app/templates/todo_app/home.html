@@ -10,7 +10,7 @@
   <h3> Now stay productive with To-do-lists </h3>
   <p> <h5> Your To-dos: </h5> </p>
   <p> {%for work in tasks %}
-      {{ work.task }}   {{ work.status }} <br>
+  <a href="{% url 'post_detail' pk=post.pk %}">   {{ work.task }} </a>  {{ work.status }} <br>
       {% endfor %}
     </p>
 <p> <a href="{% url 'post_new' %}"> Create a new To-do </a> </p>

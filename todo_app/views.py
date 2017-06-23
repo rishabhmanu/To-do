@@ -1,5 +1,4 @@
 from django.shortcuts import render, redirect
-# from django.contrib import auth
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
@@ -38,3 +37,22 @@ def post_new(request):
     else:
         form = ToDoForm()
     return render(request, 'todo_app/todo_new.html', {'form': form})
+
+@login_required
+def post_detail(request, pk):
+    post = get_object_or_404(Todo, pk=pk)
+    return render(request, 'todo_app/todo_detail.html', {'post':post})
+
+@login_required
+def post_edit(request, pk):
+    post = get_object_or_404(Todo, pk=pk)
+    if request.method == "POST":
+        form = ToDoForm(request.POST, instance=task)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.author = request.user
+            post.save()
+            return redirect('post_detail')
+    else:
+        form = ToDoForm(instance=task)
+    return render(request,'todo_app/todo_detail.html', pk=post.pk)
